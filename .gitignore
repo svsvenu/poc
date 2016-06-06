@@ -1,0 +1,26 @@
+cp*.bat
+mvnBuild.bat
+.setenv
+.DS_Store
+*.DS_Store
+Thumbs.db
+bin
+target
+.springBeans
+.settings
+.project
+.classpath
+*.iml
+*.ipr
+*.iws
+*.idea
+attendees.csv
+vendor
+
+# Idea-specific
+rebel.xml
+.idea
+.idea_modules
+*.iml
+.project
+
