@@ -24,7 +24,11 @@ public class SessionBeanTest implements Runnable {
 
 Properties jndiProps = new Properties();
 jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-jndiProps.put(Context.PROVIDER_URL,"remote://localhost:4447");
+
+			jndiProps.put(Context.PROVIDER_URL, "remote://127.0.0.1:4447");
+
+
+	//		jndiProps.put(Context.PROVIDER_URL,"remote://localhost:4447");
 jndiProps.put("jboss.naming.client.ejb.context", true);
 // create a context passing these properties
 Context ctx = new InitialContext(jndiProps);
@@ -33,9 +37,9 @@ Context ctx = new InitialContext(jndiProps);
 	
 	sbt.run();
 	
-	ExecutorService pool = Executors.newFixedThreadPool(30);
+	ExecutorService pool = Executors.newFixedThreadPool(1);
 
-	for (int i = 0; i < 300; i++) {
+	for (int i = 0; i < 2; i++) {
 	    pool.submit(new SessionBeanTest(ctx));
 	}
 

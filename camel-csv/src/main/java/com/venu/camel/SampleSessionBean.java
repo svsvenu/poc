@@ -2,6 +2,7 @@ package com.venu.camel;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -13,6 +14,7 @@ import org.apache.camel.cdi.ContextName;
  */
 @Stateless
 @LocalBean
+@Startup
 public class SampleSessionBean implements SampleSessionBeanRemote, SampleSessionBeanLocal {
 
     /**
