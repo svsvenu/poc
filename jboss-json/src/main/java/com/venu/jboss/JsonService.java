@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-//http://localhost:8080/jboss-json-1.0-SNAPSHOT/rest/message/u
+//http://localhost:8080/jboss-json-1.0-SNAPSHOT/rest/message/venu
 
 @Path("/message")
 public class JsonService {
