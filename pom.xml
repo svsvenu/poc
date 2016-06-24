@@ -11,7 +11,10 @@
 
     <modules>
         <module>webservice-examples</module>
+        <module>camel-csv</module>
+        <module>camel-jms</module>
+        <module>spring-boot</module>
+        <module>jboss-json</module>
     </modules>
-
 
 </project>
