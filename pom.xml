@@ -17,6 +17,7 @@
         <module>jboss-json</module>
         <module>jdg-remote-query</module>
         <module>split-aggregate</module>
+        <module>spring-ws</module>
     </modules>
 
 </project>
