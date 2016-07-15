@@ -11,7 +11,7 @@ public class CustomEndPointInterceptor  implements EndpointInterceptor {
 
 
     public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
-        System.out.println("Global Request Handling" + messageContext.);
+        System.out.println("Global Request Handling" + messageContext);
         return true;
     }
 

@@ -18,6 +18,7 @@
         <module>jdg-remote-query</module>
         <module>split-aggregate</module>
         <module>spring-ws</module>
+        <module>jdg-library</module>
     </modules>
 
 </project>

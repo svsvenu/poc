@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>poc</artifactId>
+        <groupId>com.venu</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>jdg-library</artifactId>
+
+    <properties>
+        <!-- Explicitly declaring the source encoding eliminates the following
+            message: -->
+        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
+            resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Defines the main class to be execute when running java -jar command -->
+        <main.class.remote-query>com.venu.AddressBookManager</main.class.remote-query>
+        <version.org.infinispan>7.2.0.Final</version.org.infinispan>
+
+        <!-- other plugin versions -->
+        <exec.plugin.version>1.2.1</exec.plugin.version>
+        <ant.plugin.version>1.7</ant.plugin.version>
+
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${version.org.infinispan}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Import the Infinispan client hotrod -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-client-hotrod</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-query-dsl</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-remote-query-client</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.1.4.GA</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+
+
+</project>
