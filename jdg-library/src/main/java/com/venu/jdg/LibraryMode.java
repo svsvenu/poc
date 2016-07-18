@@ -179,7 +179,7 @@ public class LibraryMode {
         System.out.println("Starting a cache manager with a programmatic configuration");
         DefaultCacheManager cacheManager = new DefaultCacheManager(
                 GlobalConfigurationBuilder.defaultClusteredBuilder()
-                        .transport().nodeName(nodeName).addProperty("configurationFile", "jgroups.xml")
+                        .transport().nodeName(nodeName).addProperty("configurationFile", "jgroups-tcp.xml")
                         .build(),
                 new ConfigurationBuilder()
                         .clustering()
