@@ -105,7 +105,7 @@ public class LibraryMode {
         final Cache<String, String> cache = cacheManager.getCache("dist");
 
         System.out.printf("Cache %s started on %s, cache members are now %s\n", cacheName, cacheManager.getAddress(),
-                cache.getAdvancedCache().getRpcManager().getMembers());
+                cache.getAdvancedCache().withFlags(Flag.CACHE_MODE_LOCAL).getRpcManager().getMembers());
 
         // Add a listener so that we can see the puts to this node
         cache.addListener(new LoggingListener());
@@ -153,7 +153,8 @@ public class LibraryMode {
         System.out.printf("Cache contents on node %s\n", cache.getAdvancedCache().getRpcManager().getAddress());
 
 
-        ArrayList<Map.Entry<String, String>> entries = new ArrayList<>(cache.getAdvancedCache().withFlags(Flag.SKIP_REMOTE_LOOKUP).entrySet());
+        ArrayList<Map.Entry<String, String>> entries = new ArrayList<>(cache.getAdvancedCache().withFlags(Flag.SKIP_REMOTE_LOOKUP).withFlags(Flag.CACHE_MODE_LOCAL
+        ).entrySet());
 
         Collections.sort(entries, new Comparator<Map.Entry<String, String>>() {
             @Override
@@ -161,10 +162,14 @@ public class LibraryMode {
                 return o1.getKey().compareTo(o2.getKey());
             }
         });
+
+        int count=0;
         for (Map.Entry<String, String> e : entries) {
+
+            count++;
             System.out.printf("\t%s = %s\n", e.getKey(), e.getValue());
         }
-        System.out.println();
+        System.out.println("local count " + count);
     }
 
     private EmbeddedCacheManager createCacheManager() throws IOException {
@@ -184,7 +189,7 @@ public class LibraryMode {
                 new ConfigurationBuilder()
                         .clustering()
                         .cacheMode(CacheMode.DIST_SYNC)
-                        .hash().numOwners(2)
+                        .hash().numOwners(1)
                         .build()
         );
 
@@ -194,7 +199,7 @@ public class LibraryMode {
         cacheManager.defineConfiguration("dist", new ConfigurationBuilder()
                         .clustering()
                         .cacheMode(CacheMode.DIST_SYNC)
-                                //      .hash().numOwners(1)
+                                      .hash().numOwners(1)
                         .build()
         );
         return cacheManager;

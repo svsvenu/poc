@@ -31,9 +31,11 @@ import org.infinispan.manager.DefaultCacheManager;
  */
 
 
+import org.infinispan.Cache;
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.jboss.logging.BasicLogger;
 import org.jboss.logging.Logger;
@@ -46,7 +48,7 @@ import java.util.Map;
 
 public class LookupDistributed {
 
-    private static final BasicLogger log = Logger.getLogger(LookupDistributed.class);
+    private static final BasicLogger log = Logger.getLogger(LibraryMode.class);
 
     private final boolean useXmlConfig;
     private final String cacheName;
@@ -61,40 +63,14 @@ public class LookupDistributed {
 
     public static void main(String[] args) throws Exception {
         boolean useXmlConfig = false;
-        String cache = "repl";
-        String nodeName = null;
-
-        for (String arg : args) {
-            switch (arg) {
-                case "-x":
-                    useXmlConfig = true;
-
-                    break;
-                case "-p":
-                    useXmlConfig = false;
-                    break;
-                case "-d":
-                    cache = "dist";
-                    break;
-                case "-r":
-                    cache = "repl";
-                    break;
-                default:
-                    nodeName = arg;
-                    break;
-            }
-        }
+        String cache = "dist";
+        String nodeName = "E";
 
 
         new LookupDistributed(useXmlConfig, cache, nodeName).run();
     }
 
     public void run() throws IOException, InterruptedException {
-
-        System.out.println(System.getProperty("delay"));
-
-        int delay = Integer.parseInt(System.getProperty("delay"));
-
 
         EmbeddedCacheManager cacheManager = createCacheManager();
 
@@ -108,44 +84,22 @@ public class LookupDistributed {
         // Add a listener so that we can see the puts to this node
         cache.addListener(new LoggingListener());
 
-        System.out.println("added listerner");
-        printCacheContents(cache);
+        for (int i=0 ;i<1000; i++) {
 
-        Thread putThread = new Thread() {
-            @Override
-            public void run() {
-                int counter = 0;
-                while (!stop) {
-                    try {
-                        cache.put("key"  + counter , "" + cache.getAdvancedCache().getRpcManager().getAddress() + "-" + counter);
-                    } catch (Exception e) {
-                        log.warnf("Error inserting key into the cache", e);
-                    }
-                    counter++;
+            System.out.println("value of key is " + cache.get("key65"));
 
-                    try {
-                        Thread.sleep(delay);
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                }
-            }
-        };
-        putThread.start();
+            Thread.sleep(1000l);
 
-        System.out.println("Press Enter to print the cache contents, Ctrl+D/Ctrl+Z to stop.");
-        while (System.in.read() > 0) {
-            printCacheContents(cache);
         }
+      //  printCacheContents(cache);
 
-        stop = true;
-        putThread.join();
-        cacheManager.stop();
         System.exit(0);
+
+
     }
 
     /**
-     * {@link Cache#entrySet()}
+     * {@link org.infinispan.Cache#entrySet()}
      */
     private void printCacheContents(Cache<String, String> cache) {
         System.out.printf("Cache contents on node %s\n", cache.getAdvancedCache().getRpcManager().getAddress());

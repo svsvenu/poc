@@ -11,8 +11,6 @@ import org.apache.camel.cdi.ContextName;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
 import org.apache.camel.model.dataformat.BindyType;
-import org.apache.camel.model.dataformat.CsvDataFormat;
-import com.venu.camel.PurchaseOrder;
 import java.math.BigDecimal;
 
 @Startup

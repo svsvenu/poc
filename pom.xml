@@ -19,6 +19,9 @@
         <module>split-aggregate</module>
         <module>spring-ws</module>
         <module>jdg-library</module>
+        <module>camel-file</module>
+        <module>camel-custom-component</module>
+        <module>camel-cxfrs</module>
     </modules>
 
 </project>

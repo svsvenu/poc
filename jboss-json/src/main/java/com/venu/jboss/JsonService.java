@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 
 
-//http://localhost:8080/jboss-json-1.0-SNAPSHOT/rest/message/venu
+//http://localhost:8080/jboss-json-1.0-SNAPSHOT/rest/message/1
 
 @Path("/message")
 @ValidateRequest
