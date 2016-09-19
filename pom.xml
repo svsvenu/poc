@@ -22,6 +22,8 @@
         <module>camel-file</module>
         <module>camel-custom-component</module>
         <module>camel-cxfrs</module>
+        <module>parent-profiles</module>
+        <module>mockito</module>
     </modules>
 
 </project>
