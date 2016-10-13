@@ -24,6 +24,8 @@
         <module>camel-cxfrs</module>
         <module>parent-profiles</module>
         <module>mockito</module>
+        <module>class-loading</module>
+        <module>wildfly-swarm-infinispan</module>
     </modules>
 
 </project>

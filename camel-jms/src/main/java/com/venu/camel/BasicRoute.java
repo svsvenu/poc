@@ -18,7 +18,10 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.lang.instrument.Instrumentation;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Vector;
 
 @Startup
 @ApplicationScoped
@@ -65,6 +68,7 @@ public class BasicRoute extends RouteBuilder {
         System.out.println("added notifier for context " + getContext().getName());
 
         System.out.println(getContext().getManagementStrategy().getEventNotifiers());
+
 
       //  getContext().stop();
 
@@ -115,7 +119,20 @@ public class BasicRoute extends RouteBuilder {
         .transform(simple(("hello")));
 
 
+        Field f = ClassLoader.class.getDeclaredField("classes");
+        f.setAccessible(true);
 
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+        System.out.println("class loader name is  " + classLoader.getClass().getName());
+
+
+        Vector<Class> classes =  (Vector<Class>) f.get(classLoader);
+
+        for (Class clas : classes) {
+
+            System.out.println("classes are " + clas.getName());
+        }
 
 
 
