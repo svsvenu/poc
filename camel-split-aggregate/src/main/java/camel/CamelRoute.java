@@ -29,23 +29,39 @@ public class CamelRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
+        // in case of io exception then try to redeliver up till 2 times
+// (do not use any delay due faster unit testing)
+        onException(Exception.class)
+                .maximumRedeliveries(2).redeliveryDelay(0);
+
+        RecoverableAggregationRepositoryImpl agg = new RecoverableAggregationRepositoryImpl();
+
         from("file:////Users/venusurampudi/Desktop/temp")
-                .split(body().tokenize("\n")).streaming().parallelProcessing()
+                .split(body().tokenize("\n")).streaming()
+                .to("bean:processingBean?method=doSomething")
+                        //.parallelProcessing()
                 .to("direct:aggregate")
                 .end();
 
         from("direct:aggregate")
-               .aggregate(constant(true), new ArrayListAggregationStrategy())
-                .completionSize(10)
+             //   .aggregate(simple("${id}"), new ArrayListAggregationStrategy())
+                              .aggregate(constant(true), new ArrayListAggregationStrategy())
+                .completionSize(5)
+                .aggregationRepository(agg)
+
+                .log("about to call agg")
+
                 .to("direct:processresults");
 
         from("direct:processresults")
                 .process(new Processor(){
                      public void process(Exchange en){
 
+                         System.out.println("count size is "  );
+
+
                          ArrayList<String> list = (ArrayList<String>) en.getIn().getBody(ArrayList.class);
 
-                         System.out.println("count size is " + list.size() );
                      }
 
                 });
@@ -59,27 +75,18 @@ public class CamelRoute extends RouteBuilder {
 
 
         public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
-            // put order together in old exchange by adding the order from new exchange
-
+            Object newBody = newExchange.getIn().getBody();
+            ArrayList<Object> list = null;
             if (oldExchange == null) {
-                // the first time we aggregate we only have the new exchange,
-                // so we just return it
+                list = new ArrayList<Object>();
+                list.add(newBody);
+                newExchange.getIn().setBody(list);
                 return newExchange;
+            } else {
+                list = oldExchange.getIn().getBody(ArrayList.class);
+                list.add(newBody);
+                return oldExchange;
             }
-
-            String orders = oldExchange.getIn().getBody(String.class);
-            String newLine = newExchange.getIn().getBody(String.class);
-
-           System.out.println("Aggregate old orders: " + orders);
-            System.out.println("Aggregate new order: " + newLine);
-
-            // put orders together separating by semi colon
-            orders = orders + ";" + newLine;
-            // put combined order back on old to preserve it
-            oldExchange.getIn().setBody(orders);
-
-            // return old as this is the one that has all the orders gathered until now
-            return oldExchange;
         }
 
     }

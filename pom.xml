@@ -26,6 +26,7 @@
         <module>mockito</module>
         <module>class-loading</module>
         <module>wildfly-swarm-infinispan</module>
+        <module>jdg-remote-exec</module>
     </modules>
 
 </project>
