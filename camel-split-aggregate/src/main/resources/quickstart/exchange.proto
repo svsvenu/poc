@@ -1,0 +1,12 @@
+package quickstart;
+
+message exchange {
+
+   /* @IndexedField */
+   required string name = 1;
+
+   /* @IndexedField */
+   optional bytes bytes = 2;
+
+
+}

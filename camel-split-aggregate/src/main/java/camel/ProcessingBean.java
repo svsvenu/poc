@@ -14,15 +14,15 @@ public class ProcessingBean {
     public void doSomething(Exchange exchange) throws Exception{
         // process the exchange
 
-    String line = (String) exchange.getIn().getBody();
+  //  String line = (String) exchange.getIn().getBody();
 
-        if (line.equalsIgnoreCase("5,2,3,4,5")) {
+      //  if (line.equalsIgnoreCase("5,2,3,4,5")) {
 
-            System.out.println("Line is " + line);
+            System.out.println("Line is " + exchange.getIn().getBody().toString());
 
           //  throw new Exception("Exceptin");
 
-        }
+      //  }
 
        //  exchange.getIn().setBody("Bye World");
 

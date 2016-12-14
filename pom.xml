@@ -16,7 +16,7 @@
         <module>spring-boot</module>
         <module>jboss-json</module>
         <module>jdg-remote-query</module>
-        <module>split-aggregate</module>
+        <module>camel-split-aggregate</module>
         <module>spring-ws</module>
         <module>jdg-library</module>
         <module>camel-file</module>
