@@ -20,9 +20,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecoverableAggregationRepositoryImpl implements RecoverableAggregationRepository {
 
-   // private final ConcurrentMap<String, bytes> cache = new ConcurrentHashMap<String, Exchange>();
-
-
     public Set<String> scan(CamelContext camelContext) {
         return null;
     }
@@ -36,8 +33,6 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
     }
 
     public void setRecoveryInterval(long l) {
-
-
 
     }
 
@@ -71,6 +66,8 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
 
     public Exchange add(CamelContext camelContext, String key, Exchange exchange) {
 
+        System.out.println("called add for key " + key);
+
         DefaultExchangeHolder deh = DefaultExchangeHolder.marshal(exchange, true);
 
         object2Bytes(deh);
@@ -81,10 +78,9 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
 
         ce.setBytes( object2Bytes(deh));
 
-
         CacheOperations.getCache().put(key, ce);
 
-        printContents();
+        // printContents();
 
         return exchange;
 
@@ -113,10 +109,9 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
 
         deh.unmarshal(answer,deh);
 
-
         printContents();
 
-        return  answer;
+       return  answer;
 
     }
 
@@ -124,14 +119,11 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
 
         System.out.println("called remove for " + key);
 
-        printContents();
-
+        //printContents();
 
         CacheOperations.getCache().remove(key);
 
-        printContents();
-
-
+        //printContents();
 
 
     }
@@ -139,7 +131,6 @@ public class RecoverableAggregationRepositoryImpl implements RecoverableAggregat
     public void confirm(CamelContext camelContext, String s) {
 
         System.out.println("called confirm");
-
 
     }
 

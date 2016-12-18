@@ -53,6 +53,13 @@ public class EmployeeType implements Serializable{
      *     {@link BigInteger }
      *     
      */
+
+    public EmployeeType(){
+
+        System.out.println("Constructed employee type");
+    }
+
+
     public BigInteger getNumber() {
         return number;
     }
@@ -117,4 +124,10 @@ public class EmployeeType implements Serializable{
         this.lastName = value;
     }
 
+
+    public String toString(){
+
+        return number + ":" + firstName + ":" + lastName;
+
+    }
 }

@@ -7,16 +7,19 @@ package camel;
 import org.infinispan.protostream.MessageMarshaller;
 import java.io.IOException;
 /**
- * @author Adrian Nistor
+ * @author Venu surampudi
  */
 public class ExchangeMarshaller implements MessageMarshaller<CamelExchange> {
 
     public String getTypeName() {
+
         return "quickstart.exchange";
     }
 
     public Class<CamelExchange> getJavaClass() {
+
         return CamelExchange.class;
+
     }
 
     public CamelExchange readFrom(ProtoStreamReader reader) throws IOException {

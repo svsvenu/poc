@@ -88,4 +88,9 @@ public class HolidayType implements Serializable{
         this.endDate = value;
     }
 
+
+    public String toString() {
+
+        return startDate.toString() + ":" + endDate.toString();
+    }
 }

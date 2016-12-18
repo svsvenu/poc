@@ -37,6 +37,12 @@ public class HolidayRequest implements Serializable{
     @XmlElement(name = "Employee", required = true)
     protected EmployeeType employee;
 
+    public  HolidayRequest(){
+
+        System.out.println("holidy request constructed");
+
+    }
+
     /**
      * Gets the value of the holiday property.
      * 
@@ -58,6 +64,9 @@ public class HolidayRequest implements Serializable{
      *     
      */
     public void setHoliday(HolidayType value) {
+
+        System.out.println("set holiday called");
+
         this.holiday = value;
     }
 
@@ -85,4 +94,15 @@ public class HolidayRequest implements Serializable{
         this.employee = value;
     }
 
+
+    public String toString(){
+
+        if (holiday != null && employee != null) {
+
+            return holiday.toString() + employee.toString();
+
+        }
+        else return "nulls";
+
+    }
 }

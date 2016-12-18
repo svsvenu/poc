@@ -1,7 +1,7 @@
 package camel;
 
 import com.HolidayRequest;
-import com.HumanResource;
+import org.apache.log4j.Logger;
 
 import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
@@ -20,8 +20,9 @@ import java.util.function.Consumer;
  * Created by venusurampudi on 10/27/16.
  */
 @Named
-
 public class CustomSplitter implements Iterator{
+
+    private static Logger LOG = Logger.getLogger(CustomSplitter.class);
 
     private XMLInputFactory  factory = null;
 
@@ -31,17 +32,18 @@ public class CustomSplitter implements Iterator{
 
         try {
 
-            System.out.println("created splitter");
+            LOG.info("\t2-\t Created Splitter");
+
 
              factory = XMLInputFactory.newInstance();
 
              reader = factory.createXMLStreamReader(new FileInputStream(new File("/Users/venusurampudi/Desktop/temp/.camel/employee.txt")));
 
-            reader.nextTag();
+         //   reader.nextTag();
 
-            while(!reader.getLocalName().equals("HolidayRequest")) {
-                reader.nextTag();
-            }
+         //   while(!reader.getLocalName().equals("HolidayRequest")) {
+         //       reader.nextTag();
+         //   }
 
         }
         catch (Exception e){
@@ -60,8 +62,11 @@ public class CustomSplitter implements Iterator{
 
         boolean retVal = false;
 
+        LOG.info(" Called hasNext() " );
+
         try {
             retVal = reader.hasNext();
+
         } catch (XMLStreamException e) {
             e.printStackTrace();
         }
@@ -71,10 +76,13 @@ public class CustomSplitter implements Iterator{
 
     public Object next() {
 
+        LOG.info(" Called next() " );
+
         Object object = null;
 
-        HolidayRequest hr = new HolidayRequest();
+       // HolidayRequest hr = new HolidayRequest();
 
+        HolidayRequest hr = null;
 
         try{
 
@@ -98,10 +106,11 @@ public class CustomSplitter implements Iterator{
 
                 hr = jb.getValue();
 
+                LOG.info("next returning" + hr.getEmployee());
+
             }
 
 
-            // object = reader.next();
         }
         catch (NoSuchElementException nse){
 
