@@ -54,7 +54,7 @@ public class CamelRoute extends RouteBuilder {
              //   .aggregate(simple("${id}"), new ArrayListAggregationStrategy())
                 .log("aggregate called")
                 .aggregate(constant(format), new ArrayListAggregationStrategy())
-                .completionSize(2)
+                .completionSize(20)
                 .aggregationRepository(agg)
                 .to("direct:processresults");
 

@@ -2,14 +2,18 @@ package camel;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.client.hotrod.Search;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 import org.infinispan.client.hotrod.marshall.ProtoStreamMarshaller;
 import org.infinispan.protostream.FileDescriptorSource;
 import org.infinispan.protostream.SerializationContext;
 import org.infinispan.protostream.annotations.ProtoSchemaBuilder;
+import org.infinispan.query.dsl.Query;
+import org.infinispan.query.dsl.QueryFactory;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by venusurampudi on 11/30/16.
@@ -112,5 +116,16 @@ public class CacheOperations {
         return repoCache;
     }
 
+    public static List<CamelExchange> getExchangeContents(){
+
+        QueryFactory qf = Search.getQueryFactory(CacheOperations.getCache());
+        Query query = qf.from(CamelExchange.class)
+                .having("name").like("%").toBuilder()
+                .build();
+
+        System.out.println("query built ok"+ query.list().size());
+
+        return query.list();
+    }
 
 }

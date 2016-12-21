@@ -27,9 +27,9 @@ public class ListObjects {
 
     public static void main(String[] args){
 
-        // queryPersonByPhone();
+         queryPersonByPhone();
 
-        parseXML();
+       //  parseXML();
     }
 
     private static void queryPersonByPhone() {
@@ -43,6 +43,24 @@ public class ListObjects {
         RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
 
         RemoteCache<String, Object> repoCache = CacheOperations.getCache();
+
+        CamelExchange ce = new CamelExchange();
+
+        String test = "test";
+
+     //   repoCache.clear();
+
+        ce.setBytes(test.getBytes());
+
+
+
+        for (int i=0; i<10 ; i++){
+
+            ce.setName("ven"+i);
+
+            repoCache.put("venu" + i, ce);
+
+        }
 
 
         QueryFactory qf = Search.getQueryFactory(repoCache);

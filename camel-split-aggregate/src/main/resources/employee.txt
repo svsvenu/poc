@@ -1,0 +1,12 @@
+<sch:HolidayRequest xmlns:sch="http://mycompany.com/hr/schemas">
+         <!--You may enter the following 2 items in any order-->
+         <sch:Holiday>
+            <sch:StartDate>2016-01-01</sch:StartDate>
+            <sch:EndDate>2016-01-01</sch:EndDate>
+         </sch:Holiday>
+         <sch:Employee>
+            <sch:Number>1</sch:Number>
+            <sch:FirstName>venu</sch:FirstName>
+            <sch:LastName>surampudi</sch:LastName>
+         </sch:Employee>
+</sch:HolidayRequest>

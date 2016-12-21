@@ -2,7 +2,6 @@ package camel;
 
 import com.HolidayRequest;
 import org.apache.log4j.Logger;
-
 import javax.inject.Named;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -12,9 +11,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.Thread;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
+import java.lang.ClassLoader;
+import java.io.InputStream;
 
 /**
  * Created by venusurampudi on 10/27/16.
@@ -32,18 +34,16 @@ public class CustomSplitter implements Iterator{
 
         try {
 
-            LOG.info("\t2-\t Created Splitter");
+            LOG.info("Created Splitter");
 
+            factory = XMLInputFactory.newInstance();
 
-             factory = XMLInputFactory.newInstance();
+            ClassLoader classloader;
+            classloader = Thread.currentThread().getContextClassLoader();
+            InputStream is = classloader.getResourceAsStream("employee.txt");
 
-             reader = factory.createXMLStreamReader(new FileInputStream(new File("/Users/venusurampudi/Desktop/temp/.camel/employee.txt")));
+            reader = factory.createXMLStreamReader(is);
 
-         //   reader.nextTag();
-
-         //   while(!reader.getLocalName().equals("HolidayRequest")) {
-         //       reader.nextTag();
-         //   }
 
         }
         catch (Exception e){
