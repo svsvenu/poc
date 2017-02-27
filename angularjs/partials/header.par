@@ -1,0 +1,11 @@
+<nav>
+<div ng-controller="NavCtrl" >
+<ul class="menul">
+  <li ng-class="{active : isActive('/home')}"><a href="#home">Home</a></li>
+  <li ng-class="{active : isActive('/news')}"><a href="#news">News</a></li>
+  <li ng-class="{active : isActive('/contact')}"><a href="#contact">Contact</a></li>
+  <li ng-class="{active : isActive('/about')}"><a href="#about">About</a></li>
+  <li ng-class="{active : isActive('/mission')}"><a href="#mission">mission</a></li>
+</ul>
+</div>
+</nav>

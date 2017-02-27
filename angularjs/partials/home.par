@@ -1,0 +1,7 @@
+<div id="center">
+<form>
+    <label>Name: <input type="text" ng-bind="user.name" ng-model="user.name" /></label><br />
+</form>
+
+</div>
+{{ user | json }}
