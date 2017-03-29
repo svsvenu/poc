@@ -23,6 +23,9 @@ public class BasicRoute extends RouteBuilder {
     @Inject
      CamelContext camelctx;
 
+    @Inject
+
+
     @Override
     public void configure() throws Exception {
 

@@ -1,4 +1,4 @@
-var app = angular.module("hashtag", ["ngRoute"]);
+var app = angular.module("hashtag", ["ngRoute","DataFactory"]);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -24,7 +24,7 @@ app.config(function($routeProvider) {
     
 });
 
-app.controller('NavCtrl', function($scope, $location) {
+app.controller('NavCtrl', function($scope, $location, userService, anotherUserService) {
     
     $scope.user = {
         
@@ -43,5 +43,13 @@ app.controller('NavCtrl', function($scope, $location) {
     
     console.log("user name is " + $scope.user.name);
     
+    console.log("userrs " + userService.users);
     
-});
+        console.log("another users " + anotherUserService.users);
+
+    
+    
+}); 
+
+
+

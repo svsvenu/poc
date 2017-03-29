@@ -27,6 +27,7 @@
         <module>class-loading</module>
         <module>wildfly-swarm-infinispan</module>
         <module>jdg-remote-exec</module>
+        <module>mbeans</module>
     </modules>
 
 </project>
