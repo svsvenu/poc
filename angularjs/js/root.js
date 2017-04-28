@@ -24,13 +24,18 @@ app.config(function($routeProvider) {
     
 });
 
-app.controller('NavCtrl', function($scope, $location, userService, anotherUserService) {
+app.controller('NavCtrl', function($rootScope, $scope, $location, userService, anotherUserService, $interval) {
     
     $scope.user = {
         
         name : "venu"
         
     };
+    
+    
+    $rootScope.message = "venu";
+    
+    $scope.setUser = function() { $scope.user.name = "jeju";}
     
     $scope.isActive = function(route) {
         
@@ -41,11 +46,54 @@ app.controller('NavCtrl', function($scope, $location, userService, anotherUserSe
       
     };
     
+   // $interval(function () {
+     //       $scope.message = "Timeout called!";
+       //     console.log("user name is called" );
+        
+           //  $scope.$apply();
+
+
+//        }
+  //  , 2000);
+    
     console.log("user name is " + $scope.user.name);
     
     console.log("userrs " + userService.users);
     
+   $rootScope.promise = $interval(
+        
+        function() {
+            
+         //   $scope.setUser();
+            
+      //                          console.log("before");
+
+            
+        //                        console.log($scope.message);
+
+            var d = new Date();
+
+            
+           $rootScope.message = d.getTime();
+            
+            
+                    console.log($scope.message);
+
+            
+            
+        }
+        , 300);
+
+
+    
+        console.log("new1 interval " );
+
+    
         console.log("another users " + anotherUserService.users);
+    
+            console.log("user is  " + $scope.user.name);
+
+    
 
     
     

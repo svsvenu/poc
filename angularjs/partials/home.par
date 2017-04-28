@@ -1,8 +1,4 @@
 <div id="center">
-<form>
-    <label>Name: <input type="text" ng-bind="user.name" ng-model="user.name" /></label><br />
-</form>
-<venu-directive></venu-directive>
+User name is "{{ message }}"
 </div>
-{{ user | json }}
 

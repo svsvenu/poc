@@ -6,7 +6,7 @@ dataFactory.factory('userService',function($http){
     
     fac.users = ['venu', 'jeju', 'chote'];
     
-    console.log($http);
+  //  console.log($http);
     
     return fac;
     
@@ -24,11 +24,11 @@ dataFactory.factory('anotherUserService', function($http){
     
 });
 
-angular.module("hashtag").directive('venuDirective', function(){
+angular.module("hashtag").directive('venuDirective', function($interval, $scope){
         
     return {
         
-            template: "<b>Hi from venu1</b>"
+            template: "<b>Hi from {{ message.message }}</b>"
 
     };
 }
