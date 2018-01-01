@@ -1,1 +1,1 @@
-Standalone camel rest application
+## Standalone camel rest application
