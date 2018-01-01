@@ -29,6 +29,8 @@
         <module>jdg-remote-exec</module>
         <module>mbeans</module>
         <module>json-map</module>
+        <module>java-nio</module>
+        <module>camel-standalone-rest</module>
     </modules>
 
 </project>

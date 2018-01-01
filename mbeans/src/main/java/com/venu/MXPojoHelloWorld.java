@@ -3,7 +3,7 @@ package com.venu;
 /**
  * Created by venusurampudi on 3/28/17.
  */
-public class MXPojoHelloWorld implements IHelloWorldMXBean {
+public class MXPojoHelloWorld { // implements IHelloWorldMXBean {
     public long getCount() {
         return 0;
     }
