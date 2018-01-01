@@ -12,7 +12,9 @@ Camel seems to pick up the one in the class path, to test it, The pom.xml file a
 one for netty (camel-netty4-http) and the other for restlet (camel-restlet ). The usage of either one is set
 in the code below
 
-{%highlight java %}
-restConfiguration().component("restlet")
-{%endhighlight %}
+{% highlight c++ %}
+
+some code here
+
+{% endhighlight %}
 
