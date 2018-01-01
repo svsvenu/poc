@@ -1,0 +1,1 @@
+Standalone camel rest application
