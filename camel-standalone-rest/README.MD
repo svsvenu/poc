@@ -13,9 +13,10 @@ one for netty (camel-netty4-http) and the other for restlet (camel-restlet ). Th
 in the code below
 
 ```java
-
+// Configure as restlet
 restConfiguration().component("restlet")
 
+// Configure as netty4
 restConfiguration().component("netty4-http")
 
 ```
