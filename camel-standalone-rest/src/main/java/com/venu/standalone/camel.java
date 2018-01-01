@@ -45,7 +45,9 @@ public class Camel {
         @Override
         public void configure() throws Exception {
 
-            restConfiguration().component("netty4-http").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
+           // restConfiguration().component("netty4-http").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
+
+            restConfiguration().component("restlet").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
 
             rest("/send")
                     .get("/hello").to("direct:hello")
