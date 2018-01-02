@@ -3,6 +3,7 @@
 The idea is to expose a simple restful webservice using camel without a container, containers are fast
 approaching the fate of plastic bags at the local grocery stores, you can use them but brace yourself for
 a stink eye. This "uber jar" type application can easily be ambulated into docker images, higher environments.
+This blog is "inspired" by the camel documentation
 
 ## The listener
 
@@ -20,3 +21,10 @@ restConfiguration().component("restlet")
 restConfiguration().component("netty4-http")
 
 ```
+
+## The routes
+
+Each of the url map is deployed as a new route, this can be corroborated by inspecting the JMX console.
+
+![Alt text](/jconsole_routes.png?raw=true "Routes")
+

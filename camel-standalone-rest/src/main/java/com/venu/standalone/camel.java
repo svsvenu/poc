@@ -34,7 +34,7 @@ public class Camel {
             main.addMainListener(new Events());
 
         System.out.println("Starting Camel. Use ctrl + c to terminate the JVM.\n");
-
+// Run is a blocking call
         main.run();
 
         }
@@ -45,26 +45,25 @@ public class Camel {
         @Override
         public void configure() throws Exception {
 
-           // restConfiguration().component("netty4-http").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
+            restConfiguration().component("netty4-http").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
 
-            restConfiguration().component("restlet").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
+          //  restConfiguration().component("restlet").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
 
-            rest("/send")
-                    .get("/hello").to("direct:hello")
-                    .get("/bye").consumes("application/json").to("direct:bye")
-                    .post("/bye").type(UserPojo.class).outType(CountryPojo.class).to("direct:bye");
+            rest("/user")
+                    .get("/get").consumes("application/json").to("direct:getuser")
+                    .post("/send").type(UserPojo.class).outType(Response.class).to("direct:senduser");
 
 
-            from("direct:hello")
+            from("direct:getuser").routeId("getUserRoute")
                     .transform().constant("Hello World");
 
-            from("direct:bye").log("body is " + "${body}")
+            from("direct:senduser").routeId("sendUserRoute").log("body is " + "${body}")
                     .process(new Processor() {
                         public void process(Exchange exchange) throws Exception {
-                            CountryPojo cp = new CountryPojo();
+                            Response cp = new Response();
 
-                            cp.setCountryId(4);
-                            cp.setCountryName("USA");
+                            cp.setStatus(0);
+                            cp.setMessage("Succesfully added user");
 
                             exchange.getIn().setBody(cp);
                         }
