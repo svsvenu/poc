@@ -26,5 +26,5 @@ restConfiguration().component("netty4-http")
 
 Each of the url map is deployed as a new route, this can be corroborated by inspecting the JMX console.
 
-![Alt text](/jconsole_routes.png?raw=true "Routes")
+![Alt text](/camel-standalone-rest/jconsole_routes.png?raw=true "Routes")
 
