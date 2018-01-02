@@ -29,13 +29,19 @@ Each of the url map is deployed as a new route, this can be corroborated by insp
 ![Alt text](/camel-standalone-rest/jconsole_routes.png?raw=true "Routes")
 
 The two routes which are named getUserRoute and sendUserRoute are the ones that we created normally,
-the other two routes route-1 and route-2 are deployed by camel, one processes the get and the other
+the other two routes route1 and route2 are deployed by "camel", one processes the get and the other
 addresses the post messages.
 
 ## The startup
 
 The standalone camel application with a couple of routes starts up pretty light running on about 25Mb
-of heap space
+of heap space.
 
 ![Alt text](/camel-standalone-rest/standalone_heap.png?raw=true "Heap")
 
+## Performance
+
+The standalone app seems to hold up pretty good for a load of 10 threads, the heap spikes but recovers
+as expected
+
+![Alt text](/camel-standalone-rest/heap_on_load.png?raw=true "Heap on load")
