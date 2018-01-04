@@ -31,6 +31,7 @@
         <module>json-map</module>
         <module>java-nio</module>
         <module>camel-standalone-rest</module>
+        <module>java-multithreading</module>
     </modules>
 
 </project>

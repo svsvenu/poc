@@ -70,7 +70,7 @@ public class NioClient implements Runnable {
 
      lp:   while (true) {
 
-       //     System.out.println("Registered channel count is " + this.selector.keys().size());
+            System.out.println("Registered channel count is " + this.selector.keys().size());
 
             try {
                 // Process any pending changes
