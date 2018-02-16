@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  ng-app="myApp" >
+    <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="demo.js"></script>
+    <script src="appname.service.js"></script> 
+    <script src="contact.controller.js"></script> 
+    <script src="contact.datafactory.js"></script> 
+            <script src="contact.dataservice.js"></script> 
+
+</head>
+<body>    
+<div ng-controller="myCtrl" class="container">
+      <div class="row">
+            <div class="col-sm-6">
+            <ul class="list-group">
+                <li ng-repeat="result in results" class="list-group-item" ng-click="selectContact($index)">
+                  <span> {{  result.gender }} </span>
+                  <a href="#" > <img ng-src="{{result.picture.medium}}"/> </a>
+
+                </li>       
+            </ul>
+            </div>
+            <div class="col-sm-16">
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ current.name.first + current.name.last}}</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                      </div>
+                      <div class="media-right">
+                        <img ng-src="{{ current.picture.large  }}" class="media-object" style="width:60px"></img>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

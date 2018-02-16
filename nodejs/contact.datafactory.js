@@ -1,17 +1,11 @@
-var movies = require('./movies.js')
 
-var fs = require('fs');
+( function () {
+var app = angular.module('myApp');
 
-var http = require('http');
+app.factory('ContactDataFactory', function() {
 
-var person = {
-    
-    firstName : "venu",
-    
-    lastName : "surampudi",
-    
-    printName : function() { {
-   "results":[
+results = 
+      [
       {
          "gender":"male",
          "name":{
@@ -38,7 +32,7 @@ var person = {
          "registered":"2013-11-26 04:39:09",
          "phone":"(683)-229-0716",
          "cell":"(850)-951-4696",
-         "id":1,
+         "id":"1",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/67.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/67.jpg",
@@ -72,7 +66,7 @@ var person = {
          "registered":"2008-02-06 19:46:37",
          "phone":"09-223-553",
          "cell":"047-262-22-62",
-         "id":2,
+         "id":"2",
          "picture":{
             "large":"https://randomuser.me/api/portraits/women/93.jpg",
             "medium":"https://randomuser.me/api/portraits/med/women/93.jpg",
@@ -106,7 +100,7 @@ var person = {
          "registered":"2014-03-05 05:11:49",
          "phone":"069-25657052",
          "cell":"0909-377-2209",
-         "id":3,
+         "id":"3",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/88.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/88.jpg",
@@ -140,7 +134,7 @@ var person = {
          "registered":"2007-12-21 12:04:36",
          "phone":"064-00018915",
          "cell":"0999-951-6273",
-         "id":4,
+         "id":"4",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/19.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/19.jpg",
@@ -174,7 +168,7 @@ var person = {
          "registered":"2004-12-08 02:20:07",
          "phone":"06-635-732",
          "cell":"045-826-01-55",
-         "id":5,
+         "id":"5",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/44.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/44.jpg",
@@ -208,7 +202,7 @@ var person = {
          "registered":"2015-06-10 11:14:10",
          "phone":"02-106-735",
          "cell":"041-366-54-55",
-         "id":6,
+         "id":"6",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/34.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/34.jpg",
@@ -242,7 +236,7 @@ var person = {
          "registered":"2003-12-21 09:46:26",
          "phone":"0118483 427 9745",
          "cell":"0772-511-008",
-         "id":7,
+         "id":"7",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/22.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/22.jpg",
@@ -276,7 +270,7 @@ var person = {
          "registered":"2005-12-26 04:13:16",
          "phone":"84103701",
          "cell":"71520811",
-         "id":8,
+         "id":"8",
          "picture":{
             "large":"https://randomuser.me/api/portraits/women/12.jpg",
             "medium":"https://randomuser.me/api/portraits/med/women/12.jpg",
@@ -310,7 +304,7 @@ var person = {
          "registered":"2016-01-26 12:34:21",
          "phone":"(521)-179-5583",
          "cell":"(367)-065-8720",
-         "id":9,
+         "id":"9",
          "picture":{
             "large":"https://randomuser.me/api/portraits/men/22.jpg",
             "medium":"https://randomuser.me/api/portraits/med/men/22.jpg",
@@ -344,7 +338,7 @@ var person = {
          "registered":"2016-03-10 13:35:57",
          "phone":"(50) 3863-9647",
          "cell":"(44) 8389-5710",
-         "id":10,
+         "id":"10",
          "picture":{
             "large":"https://randomuser.me/api/portraits/women/86.jpg",
             "medium":"https://randomuser.me/api/portraits/med/women/86.jpg",
@@ -352,50 +346,12 @@ var person = {
          },
          "nat":"BR"
       }
-   ],
-   "info":{
-      "seed":"7bfeb819d0e1cfc7",
-      "results":10,
-      "page":1,
-      "version":"1.1"
-   }
-}
-                    
-                    console.log(this == person)
-                    
-                }
-    
-    
-};
-
-var callBack = function(){
-    
-    console.log ("called back");
-};
-
-function printName(){
-    
-    console.log(this == person)
-}
-
-// setTimeout(callBack, 5000);
-
-person.printName();
-
-printName();
-
-// console.log(module);
-
-console.log(movies.avatar);
-
-movies.avatar();
-
-http.createServer(processReq).listen(8000);
-
-function processReq(request, response){
-    
-  response.writeHead(500, {'Content-Type': 'text/plain'});
+   ]
+   ;
    
-   // Send the response body as "Hello World"
-   response.end('Hello World\n');    
-}
+   return results;
+
+
+});
+    
+} )();
