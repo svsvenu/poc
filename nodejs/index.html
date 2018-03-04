@@ -7,7 +7,7 @@
     <script src="appname.service.js"></script> 
     <script src="contact.controller.js"></script> 
     <script src="contact.datafactory.js"></script> 
-            <script src="contact.dataservice.js"></script> 
+    <script src="contact.dataservice.js"></script> 
 
 </head>
 <body>    
@@ -31,6 +31,12 @@
                       <div class="media-right">
                         <img ng-src="{{ current.picture.large  }}" class="media-object" style="width:60px"></img>
                       </div>
+                      <div>
+                          First Name:<input type="text" ng-model="current.name.first" ></input> <br/>
+                          Last Name: <input type="text" ng-model="current.name.last"></input> <br/>
+                          <button ng-click="save(  current )">Save</button>
+                        
+                       </div>
                 </div>
             </div>
         </div>
