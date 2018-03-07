@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "test-webpack"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

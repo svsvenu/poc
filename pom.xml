@@ -32,6 +32,8 @@
         <module>java-nio</module>
         <module>camel-standalone-rest</module>
         <module>java-multithreading</module>
+        <module>deserialize-vulnerability</module>
+        <module>deserialize</module>
     </modules>
 
 </project>
