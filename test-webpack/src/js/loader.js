@@ -1,1 +1,1 @@
- export var loadVar = "test";
+ export var loadVar = "test47";

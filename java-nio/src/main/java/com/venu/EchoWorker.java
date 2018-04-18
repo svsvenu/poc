@@ -14,6 +14,7 @@ public class EchoWorker implements Runnable {
         byte[] dataCopy = new byte[count];
         System.arraycopy(data, 0, dataCopy, 0, count);
         synchronized(queue) {
+            System.out.println("Added bytes size is " + queue.size());
             queue.add(new ServerDataEvent(server, socket, dataCopy));
             queue.notify();
         }
@@ -25,17 +26,20 @@ public class EchoWorker implements Runnable {
         while(true) {
             // Wait for data to become available
             synchronized(queue) {
-                while(queue.isEmpty()) {
+             //   while(queue.isEmpty()) {
                     try {
                         queue.wait();
                     } catch (InterruptedException e) {
+                        System.out.println(" Interrupted " );
                     }
-                }
-                dataEvent = (ServerDataEvent) queue.remove(0);
+              //  }
+                // dataEvent = (ServerDataEvent) queue.remove(0);
+              //  dataEvent = (ServerDataEvent) queue.get(0);
+                System.out.println("removing " + queue.size());
             }
 
             // Return to sender
-            dataEvent.server.send(dataEvent.socket, dataEvent.data);
+           // dataEvent.server.send(dataEvent.socket, dataEvent.data);
         }
     }
 }

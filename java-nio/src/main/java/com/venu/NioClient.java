@@ -24,7 +24,7 @@ public class NioClient implements Runnable {
     private Selector selector;
 
     // The buffer into which we'll read data when it's available
-    private ByteBuffer readBuffer = ByteBuffer.allocate(8192);
+    private ByteBuffer readBuffer = ByteBuffer.allocate(5);
 
     // A list of PendingChange instances
     private List pendingChanges = new LinkedList();

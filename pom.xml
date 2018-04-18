@@ -34,6 +34,7 @@
         <module>java-multithreading</module>
         <module>deserialize-vulnerability</module>
         <module>deserialize</module>
+        <module>swagger-test</module>
     </modules>
 
 </project>

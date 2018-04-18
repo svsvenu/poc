@@ -34,7 +34,6 @@ public class MaliciousPerson extends Person implements java.io.Serializable{
 
     public String toString() {
 
-       // System.exit(0);
         return "I am Heisenberg";
     }
 

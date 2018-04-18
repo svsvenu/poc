@@ -75,7 +75,10 @@ public class NioServer implements Runnable {
                         switch (change.type) {
                             case ChangeRequest.CHANGEOPS:
                                 SelectionKey key = change.socket.keyFor(this.selector);
-                                key.interestOps(change.ops);
+                                if (key.isValid()) {
+                                    System.out.println("is valid");
+                                   key.interestOps(change.ops);
+                                }
                         }
                     }
                     this.pendingChanges.clear();
@@ -98,6 +101,7 @@ public class NioServer implements Runnable {
                     if (key.isAcceptable()) {
                         this.accept(key);
                     } else if (key.isReadable()) {
+                        System.out.println("readable");
                         this.read(key);
                     } else if (key.isWritable()) {
                         this.write(key);
@@ -126,6 +130,10 @@ public class NioServer implements Runnable {
     private void read(SelectionKey key) throws IOException {
         SocketChannel socketChannel = (SocketChannel) key.channel();
 
+        System.out.println("In read" +
+                "" );
+
+
         // Clear out our read buffer so it's ready for new data
         this.readBuffer.clear();
 
@@ -140,6 +148,8 @@ public class NioServer implements Runnable {
         int numRead;
         try {
             numRead = socketChannel.read(this.readBuffer);
+
+            System.out.println("Read " + numRead );
         } catch (IOException e) {
             // The remote forcibly closed the connection, cancel
             // the selection key and close the channel.
@@ -157,6 +167,8 @@ public class NioServer implements Runnable {
         }
 
         // Hand the data off to our worker thread
+        System.out.println("Passing to worker " + numRead );
+
         this.worker.processData(this, socketChannel, this.readBuffer.array(), numRead);
     }
 
@@ -172,12 +184,14 @@ public class NioServer implements Runnable {
 
                 String input = new String(buf.array());
 
+                System.out.println("Got input " + input );
+
                 if (input.equalsIgnoreCase("Sending from client2")) {
 
                     System.out.println("Got client 2 " );
 
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
