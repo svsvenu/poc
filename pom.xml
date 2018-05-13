@@ -32,9 +32,9 @@
         <module>java-nio</module>
         <module>camel-standalone-rest</module>
         <module>java-multithreading</module>
-        <module>deserialize-vulnerability</module>
         <module>deserialize</module>
         <module>swagger-test</module>
+        <module>net-5</module>
     </modules>
 
 </project>
