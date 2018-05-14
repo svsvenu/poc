@@ -43,6 +43,74 @@
             </execution>
         </executions>
     </plugin>
+
+
+    <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.25.2</version>
+        <executions>
+            <execution>
+                <phase>install</phase>
+                <goals>
+                    <goal>build</goal>
+                    <goal>push</goal>
+                </goals>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>svsvenu/fabric-camel-rest:${project.version}</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
+                            </build>
+                            <run>
+                                <ports>
+                                    32779:8090
+                                </ports>
+                            </run>
+                        </image>
+
+
+                    </images>
+
+                </configuration>
+
+
+
+            </execution>
+
+
+        </executions>
+
+    </plugin>
+
+    <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>fabric8-maven-plugin</artifactId>
+        <version>3.5.37</version>
+    </plugin>
+
+    <plugin>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <executions>
+            <execution><!-- Run our version calculation script -->
+                <id>Renaming build artifacts</id>
+                <phase>install</phase>
+                <goals>
+                    <goal>exec</goal>
+                </goals>
+                <configuration>
+                    <executable>bash</executable>
+                    <commandlineArgs>oc-deploy.sh</commandlineArgs>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+
+
 </plugins>
 
     </build>

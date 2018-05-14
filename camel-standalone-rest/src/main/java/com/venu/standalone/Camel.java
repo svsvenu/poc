@@ -31,6 +31,11 @@ public class Camel {
         // add routes
             main.addRouteBuilder(new MyRouteBuilder());
         // add event listener
+
+
+
+
+
             main.addMainListener(new Events());
 
         System.out.println("Starting Camel. Use ctrl + c to terminate the JVM.\n");
@@ -45,7 +50,7 @@ public class Camel {
         @Override
         public void configure() throws Exception {
 
-            restConfiguration().component("netty4-http").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
+            restConfiguration().component("netty4-http").port(8090).bindingMode(RestBindingMode.auto);
 
           //  restConfiguration().component("restlet").host("localhost").port(8090).bindingMode(RestBindingMode.auto);
 
@@ -53,9 +58,12 @@ public class Camel {
                     .get("/get").consumes("application/json").to("direct:getuser")
                     .post("/send").type(UserPojo.class).outType(Response.class).to("direct:senduser");
 
+            rest("/hello")
+                    .get("/get").produces("text/html").to("direct:getuser");
+
 
             from("direct:getuser").routeId("getUserRoute")
-                    .transform().constant("Hello World");
+                    .transform().constant("Hello World, again2");
 
             from("direct:senduser").routeId("sendUserRoute").log("body is " + "${body}")
                     .process(new Processor() {
