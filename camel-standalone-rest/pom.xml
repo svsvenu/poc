@@ -53,8 +53,10 @@
             <execution>
                 <phase>install</phase>
                 <goals>
+                    <goal>remove</goal>
                     <goal>build</goal>
                     <goal>push</goal>
+                    <goal>start</goal>
                 </goals>
                 <configuration>
                     <images>

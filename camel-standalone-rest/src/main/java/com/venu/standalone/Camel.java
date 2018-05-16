@@ -63,7 +63,7 @@ public class Camel {
 
 
             from("direct:getuser").routeId("getUserRoute")
-                    .transform().constant("Hello World, again2");
+                    .transform().constant("Hello World, again 7");
 
             from("direct:senduser").routeId("sendUserRoute").log("body is " + "${body}")
                     .process(new Processor() {
