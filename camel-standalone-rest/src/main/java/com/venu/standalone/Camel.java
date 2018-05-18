@@ -62,7 +62,7 @@ public class Camel {
                     .get("/get").produces("text/html").to("direct:getuser");
 
 
-            from("direct:getuser").routeId("getUserRoute")
+            from("direct:getuser").routeId("getUserRoute").log("received request")
                     .transform().constant("Hello World, again 7");
 
             from("direct:senduser").routeId("sendUserRoute").log("body is " + "${body}")
