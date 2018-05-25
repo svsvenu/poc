@@ -60,7 +60,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>svsvenu/fabric-camel-rest:${project.version}</name>
+                            <name>svsvenu/camel-rest:${project.version}</name>
                             <build>
                                 <dockerFileDir>${project.basedir}</dockerFileDir>
                             </build>
