@@ -26,7 +26,7 @@ public class NettyServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new HelloServerHandler());
+                            ch.pipeline().addLast(new NettyServerHandler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

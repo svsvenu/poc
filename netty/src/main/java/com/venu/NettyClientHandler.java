@@ -1,14 +1,13 @@
 package com.venu;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class ClientHandler extends SimpleChannelInboundHandler {
+public class NettyClientHandler extends SimpleChannelInboundHandler {
 
     final BlockingQueue<String> answer = new LinkedBlockingQueue<String>();
 
@@ -29,8 +28,7 @@ public class ClientHandler extends SimpleChannelInboundHandler {
                      }
              }
 
-
-    public ClientHandler(){
+    public NettyClientHandler(){
 
         System.out.println("INstantiated client handler");
     }
@@ -59,5 +57,3 @@ public class ClientHandler extends SimpleChannelInboundHandler {
 
     }
 }
-
-

@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.net.InetSocketAddress;
 
-public class NettyNoPoolClient {
+public class NettyClientNoPool {
 
     public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class NettyNoPoolClient {
             clientBootstrap.remoteAddress(new InetSocketAddress("localhost", 9999));
             clientBootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    socketChannel.pipeline().addLast(new ClientHandler());
+                    socketChannel.pipeline().addLast(new NettyClientHandler());
                 }
             });
             ChannelFuture channelFuture = clientBootstrap.connect().sync();
@@ -36,8 +36,5 @@ public class NettyNoPoolClient {
         }
         finally {
         }
-
-
-
     }
 }

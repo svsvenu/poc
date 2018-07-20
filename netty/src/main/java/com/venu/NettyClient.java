@@ -13,20 +13,21 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.Future;
 
 public class NettyClient {
+
     private static boolean initialized = false;
     public NettyClient() {
+
         System.out.println("Called netty client");
     }
     private static FixedChannelPool fcp;
 
     public static void initialize() {
-
         if ( !initialized ) {
             EventLoopGroup group = new NioEventLoopGroup();
             final Bootstrap cb = new Bootstrap();
             cb.handler(new ChannelInitializer<SocketChannel>() {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    socketChannel.pipeline().addLast(new ClientHandler());
+                    socketChannel.pipeline().addLast(new NettyClientHandler());
                 }
             });
 
@@ -40,38 +41,25 @@ public class NettyClient {
         }
     }
 
-
     public static void getClientHandler(int i) {
-
         Channel c = null;
         try {
-
             Future<Channel> f = fcp.acquire();
-       c  = f.get();
-
-       String  input = "Netty Rocks for " + i;
+            c  = f.get();
+            String  input = "Netty Rocks for " + i;
             c.writeAndFlush(Unpooled.copiedBuffer(input, CharsetUtil.UTF_8));
-     //  c.pipeline().addLast(new ClientHandler());
-     ClientHandler ch = (ClientHandler) c.pipeline().last();
-
+// Get the data out from the channel
+     NettyClientHandler ch = (NettyClientHandler) c.pipeline().last();
             String fetched = ch.getFactorial();
-
             System.out.println("**Fetched " + fetched);
-
-
             if (fetched.equalsIgnoreCase(input)) {
-
                 System.out.println("*******true********" );
-
             }
             else{
-                System.out.println("*******false********" );
+                System.out.println("*****************************************************false********" );
 
             }
-
-
             System.out.println("*******Closed********" );
-
 
         }
         catch (Exception e){e.printStackTrace();}
@@ -89,7 +77,4 @@ public class NettyClient {
             }
         }
     }
-
-
-
 }

@@ -8,7 +8,7 @@ public class MultiThreadSend {
 
         NettyClient.initialize();
         ExecutorService es = Executors.newFixedThreadPool(100);
-        for (int i= 0; i< 100; i++) {
+        for (int i= 0; i< 100000; i++) {
             System.out.println(i);
             es.submit(new CallableClient(i));
         }

@@ -6,10 +6,9 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class HelloServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     private static AtomicInteger counter = new AtomicInteger(0);
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) {
@@ -20,7 +19,7 @@ public class HelloServerHandler extends ChannelInboundHandlerAdapter {
             ByteBuf inBuffer = (ByteBuf) msg;
             String received = inBuffer.toString(CharsetUtil.UTF_8);
             System.out.println("Server received: " + received);
-           // Thread.sleep(10000);
+            Thread.sleep(10000);
             ctx.writeAndFlush(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
         }
 
@@ -38,30 +37,22 @@ public class HelloServerHandler extends ChannelInboundHandlerAdapter {
             ctx.close();
         }
 
-    public void channelActive(ChannelHandlerContext ctx)
-            throws java.lang.Exception {
+        public void channelActive(ChannelHandlerContext ctx) throws java.lang.Exception {
             increment();
         System.out.println(" channel activated counter is " + getCount() );
 
     }
 
-
     private synchronized AtomicInteger getCount() {
-
             return counter;
     }
 
     private synchronized void increment() {
-
         counter.incrementAndGet();
     }
 
     private synchronized void decrement() {
-
             counter.decrementAndGet();
      }
 
-
     }
-
-
