@@ -35,6 +35,9 @@
         <module>deserialize</module>
         <module>swagger-test</module>
         <module>net-5</module>
+        <module>camel-async</module>
+        <module>camel-async</module>
+        <module>netty</module>
     </modules>
 
 </project>
