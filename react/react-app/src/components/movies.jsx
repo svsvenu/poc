@@ -1,26 +1,15 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { Pagination } from "../common/pagination";
+import Like from "../common/Like";
+import 
 
 class Movies extends Component {
-  state = { movies: getMovies() };
-  constructor() {
-    super();
-    this.state.movies = getMovies();
-  }
-
   componentDidMount() {
     console.log("mounted");
   }
-
-  handleDelete = movie => {
-    const movies = this.state.movies.filter(m => {
-      return m._id !== movie._id;
-    });
-    this.setState({ movies: movies });
-  };
-
-  state = {};
   render() {
+    console.log(this.props.onDelete);
     return (
       <React.Fragment>
         <table className="table">
@@ -30,21 +19,24 @@ class Movies extends Component {
               <th>Genre</th>
               <th>Stock</th>
               <th>Rate</th>
-              <th />
+              <th>Like</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map(movie => (
+            {this.props.movies.map(movie => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
-                <td>{movie.genre.name}</td>
                 <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like />
+                </td>
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => this.handleDelete(movie)}
+                    onClick={() => this.props.onDelete(movie)}
                   >
                     delete
                   </button>

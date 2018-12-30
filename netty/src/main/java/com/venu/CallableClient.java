@@ -11,6 +11,8 @@ public class CallableClient implements Callable {
     public Object call()  {
         try {
             NettyClient.getClientHandler(count);
+            Thread.sleep(10000);
+
         }
         catch (Exception e) {
             e.printStackTrace();

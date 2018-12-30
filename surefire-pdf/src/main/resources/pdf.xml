@@ -8,13 +8,8 @@
         <author>The Apache Maven Project</author>
     </meta>
 
-    <toc name="Table of Contents">
-        <item name="Introduction" ref="index.apt"/>
-        <item name="Usage" ref="usage.apt.vm"/>
-        <item name="Filtering Document Descriptor" ref="examples/filtering.apt"/>
-        <item name="Configuring Reports" ref="/examples/configuring-reports.xml.vm"/>
-        <item name="Limitations" ref="limitations.apt"/>
-        <item name="FAQ" ref="faq.fml"/>
+    <toc name="Table of Contents1">
+        <item name="Introduction" ref="surefire-report.html"/>
     </toc>
 
     <cover>
@@ -26,4 +21,9 @@
         <companyName>The Apache Software Foundation</companyName>
         <companyLogo>http://www.apache.org/images/asf_logo_wide.png</companyLogo>
     </cover>
+
+        <body> <menu name="Surefire Report" href="surefire-report.html"/> <menu ref="reports"/> </body>
+
+
+
 </document>

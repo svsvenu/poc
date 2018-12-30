@@ -19,15 +19,39 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             ByteBuf inBuffer = (ByteBuf) msg;
             String received = inBuffer.toString(CharsetUtil.UTF_8);
             System.out.println("Server received: " + received);
-            Thread.sleep(10000);
-            ctx.writeAndFlush(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
-        }
+         //   Thread.sleep(10000);
+           // ctx.writeAndFlush(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
+
+        ctx.write(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
+
+        ctx.flush();
+
+       // Thread.sleep(10000);
+
+
+        ctx.write(Unpooled.copiedBuffer( "2nd attempt", CharsetUtil.UTF_8));
+
+        ctx.flush();
+
+       // Thread.sleep(10000);
+
+        ctx.write(Unpooled.copiedBuffer( "DONEz", CharsetUtil.UTF_8));
+
+        ctx.flush();
+
+
+
+
+    }
 
         @Override
         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
             System.out.println(" channel read complete " );
-            ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-                    .addListener(ChannelFutureListener.CLOSE);
+          //  ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
+            //
+            //
+            ctx.write(Unpooled.EMPTY_BUFFER)
+                .addListener(ChannelFutureListener.CLOSE);
             decrement();
         }
 
@@ -35,6 +59,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
             cause.printStackTrace();
             ctx.close();
+            decrement();
         }
 
         public void channelActive(ChannelHandlerContext ctx) throws java.lang.Exception {

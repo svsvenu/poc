@@ -38,6 +38,10 @@
         <module>camel-async</module>
         <module>camel-async</module>
         <module>netty</module>
+        <module>unsafe</module>
+        <module>surefire-pdf</module>
+        <module>java-redirect</module>
+        <module>memory-mapped-files</module>
     </modules>
 
 </project>

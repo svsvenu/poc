@@ -5,7 +5,7 @@ import io.netty.channel.ChannelPipeline;
 
 public class ChannelPoolHandler implements io.netty.channel.pool.ChannelPoolHandler {
     public void channelReleased(Channel channel) throws Exception {
-        System.out.println ("Channel released count is ");
+        System.out.println ("Channel released ");
     }
 
     public void channelAcquired(Channel channel) throws Exception {
