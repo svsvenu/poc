@@ -42,6 +42,7 @@
         <module>surefire-pdf</module>
         <module>java-redirect</module>
         <module>memory-mapped-files</module>
+        <module>ejb-timers</module>
     </modules>
 
 </project>
