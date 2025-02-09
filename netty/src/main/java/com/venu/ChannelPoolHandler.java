@@ -9,7 +9,7 @@ public class ChannelPoolHandler implements io.netty.channel.pool.ChannelPoolHand
     }
 
     public void channelAcquired(Channel channel) throws Exception {
-        System.out.println ("pool acquired");
+        System.out.println ("channel acquired");
     }
 
     public void channelCreated(Channel channel) throws Exception {

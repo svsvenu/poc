@@ -15,6 +15,8 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.Future;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import sun.misc.Unsafe;
+import org.apache.log4j.Logger;
+
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -24,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NettyClient {
 
     private static boolean initialized = false;
+    static Logger logger = Logger.getLogger(NettyClient.class);
     public NettyClient() {
 
         System.out.println("Called netty client");
@@ -32,7 +35,7 @@ public class NettyClient {
 
     public static void initialize() {
         if ( !initialized ) {
-            EventLoopGroup group = new NioEventLoopGroup();
+            EventLoopGroup group = new NioEventLoopGroup(2);
             final Bootstrap cb = new Bootstrap();
             cb.handler(new ChannelInitializer<SocketChannel>() {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -44,7 +47,8 @@ public class NettyClient {
 
             cb.remoteAddress("localhost", 9999);
             cb.option(ChannelOption.ALLOCATOR,PooledByteBufAllocator.DEFAULT);
-            cb.group(group).channel(NioSocketChannel.class);
+            cb.group(group);
+            cb.channel(NioSocketChannel.class);
             fcp = new FixedChannelPool(cb, new ChannelPoolHandler(), 5, 30000);
             initialized = true;
         }
@@ -62,38 +66,32 @@ public class NettyClient {
     public static void getClientHandler(int i) {
         Channel c = null;
         try {
-
-         Object acq =  FieldUtils.readField(fcp, "pendingAcquireQueue", true);
-
-
-
-            ArrayDeque<Object> ad = (ArrayDeque<Object>) acq;
-
-
             Future<Channel> f = fcp.acquire();
             c  = f.get();
 
-            Integer channelCount = (Integer) FieldUtils.readField(fcp, "pendingAcquireCount", true);
-            System.out.println("channelCount is " + channelCount);
-
-
-
-
+            logger.info("acquired channel ");
             String  input = "Netty Rocks for " + i;
-         //   Thread.sleep(10000);
             c.writeAndFlush(Unpooled.copiedBuffer(input, CharsetUtil.UTF_8));
+
+            for ( int j=0; j<10; j++) {
+                c.eventLoop().submit(new RunnableClass(c));
+            }
+
+            if ( c.eventLoop().inEventLoop() ){
+                System.out.println("In event loop Thread id is " + Thread.currentThread().getId());
+
+            }
+            else {
+
+                System.out.println("Not In event loop  " + Thread.currentThread().getId());
+
+            }
+
+
 // Get the data out from the channel
      NettyClientHandler ch = (NettyClientHandler) c.pipeline().last();
             String fetched = ch.getFactorial();
-            System.out.println("**Fetched " + fetched);
-            if (fetched.equalsIgnoreCase(input)) {
-                System.out.println("*******true********" );
-            }
-            else{
-                System.out.println("*****************************************************false********" );
 
-            }
-            System.out.println("*******Closed********" );
 
 
         }
@@ -101,9 +99,11 @@ public class NettyClient {
 
         finally {
             if (c != null ) {
-                c.close();
+              //  c.close();
                 try {
                     fcp.release(c).get();
+                    System.out.println("Released " + c.id());
+
                 }
                 catch (Exception e) {
                     e.printStackTrace();

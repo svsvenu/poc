@@ -17,7 +17,7 @@ public class MemoryMappedFiles {
 
     private static FileChannel fc = null;
     private static String fileName ;
-    private static Long memFileRollOverSize = 1090992000l;
+    private static Long memFileRollOverSize = 1093l;
     private static MappedByteBuffer mbb = null;
     private static Long currentPosition = 0l;
 
@@ -26,16 +26,17 @@ public class MemoryMappedFiles {
         if (args[1].equalsIgnoreCase("mem")) {
             for (int i=0; i<10000; i++ ) {
                 String content= getContent();
-                writeToFile( content);
-                currentPosition += content.length();
-                 Thread.sleep(10000);
+                writeToFile(content + "adfadsfasdfasdfasfadfasdfasdfasdfafd");
+               // currentPosition += content.length();
+                System.out.println("writttne to file");
+                 Thread.sleep(100);
             }
 
         }
         else {
-            Path filePath = Paths.get(fileName);
+            Path filePath = Paths.get(fileName+"_" + System.currentTimeMillis());
             if (!Files.exists(filePath)) {
-                Files.createFile(filePath);
+                Files.createFile(filePath );
             }
             for (int i=0; i<10000; i++ ) {
                 String content= "sys" + System.currentTimeMillis() + "\n";
@@ -48,14 +49,25 @@ public class MemoryMappedFiles {
 
     public static synchronized void writeToFile(String time) {
         try {
+
+            if ( currentPosition + time.length() > memFileRollOverSize){
+                fc.force(true);
+                System.out.println( "Before truncate file " + fc.size() );
+
+                fc.truncate(currentPosition);
+                System.out.println( "After truncate file " + fc.size() );
+
+                fc.close();
+
+                rollOver();
+            }
             ByteBuffer buffer = ByteBuffer.wrap(time.getBytes() );
             while (buffer.hasRemaining()) {
                 getMappedBuffer().put(buffer);
             }
-            if ( fc.position() > memFileRollOverSize){
-                fc.force(true);
-                fc.close();
-            }
+            System.out.println( "current position of file " + currentPosition );
+            currentPosition += time.length();
+
 
         } catch ( Exception e) {
             e.printStackTrace();
@@ -64,14 +76,22 @@ public class MemoryMappedFiles {
 
     private static FileChannel getFileChannel() throws Exception {
         if ( fc == null ) {
-            Path file = Paths.get(fileName);
+            Path file = Paths.get(fileName+ "_" + System.currentTimeMillis());
             fc = FileChannel.open(file, READ, WRITE, CREATE);
         }
         return fc;
     }
+    private static void rollOver() throws Exception {
+            Path file = Paths.get(fileName+ "_" + System.currentTimeMillis());
+            fc = FileChannel.open(file, READ, WRITE, CREATE);
+        mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, memFileRollOverSize);
+        currentPosition = 0l;
+
+    }
+
     private static MappedByteBuffer getMappedBuffer() throws Exception {
         if ( fc == null ) {
-            Path file = Paths.get(fileName);
+            Path file = Paths.get(fileName+"_" + System.currentTimeMillis());
             fc = FileChannel.open(file, READ, WRITE, CREATE);
             mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, memFileRollOverSize);
         }

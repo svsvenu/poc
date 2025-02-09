@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { Pagination } from "../common/pagination";
 import Like from "../common/Like";
-import 
 
 class Movies extends Component {
   componentDidMount() {

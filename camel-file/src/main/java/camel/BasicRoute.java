@@ -35,6 +35,9 @@ public class BasicRoute extends RouteBuilder {
 
         PropertiesComponent pc = (PropertiesComponent)camelctx.getComponent("properties");
 
+        from("grpc://localhost:1101/camel.AddressBookProtos")
+                .to("direct:grpc-service");
+
 
         System.out.println (" props " + pc);
 
@@ -56,5 +59,7 @@ public class BasicRoute extends RouteBuilder {
         .log(body().toString());
 
     }
+
+
  
 }

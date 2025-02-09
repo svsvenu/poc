@@ -1,1 +1,0 @@
-Camel CSV application

@@ -43,6 +43,12 @@
         <module>java-redirect</module>
         <module>memory-mapped-files</module>
         <module>ejb-timers</module>
+        <module>java_8</module>
+        <module>graphql-springboot</module>
+        <module>fuse-springboot</module>
+        <module>leetcode</module>
+        <module>kafka</module>
+        <module>azure-event-hub</module>
     </modules>
 
 </project>

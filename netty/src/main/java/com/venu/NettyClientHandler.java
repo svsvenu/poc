@@ -52,7 +52,10 @@ public class NettyClientHandler extends SimpleChannelInboundHandler {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
         ByteBuf inBuffer = (ByteBuf) o;
         String received = inBuffer.toString(CharsetUtil.UTF_8);
-        System.out.println("Clinet channel read 0 received: " + received + "clas is " + inBuffer.getClass().getName());
+        System.out.println("Channel id is  " + channelHandlerContext.channel().id() ) ;
+
+     //   System.out.println("Clinet channel read 0 received: " + received + "clas is " + inBuffer.getClass().getName());
+        System.out.println("in event loop is  " + channelHandlerContext.channel().eventLoop().inEventLoop() );
 
         while (inBuffer.isReadable()) {
             byte b = inBuffer.readByte();
@@ -66,7 +69,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler {
 
             }
 
-            System.out.println(new String(bytes, "UTF-8"));
+        //    System.out.println(new String(bytes, "UTF-8"));
 
         }
        // answer.add(received);

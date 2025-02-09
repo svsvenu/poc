@@ -19,21 +19,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             ByteBuf inBuffer = (ByteBuf) msg;
             String received = inBuffer.toString(CharsetUtil.UTF_8);
             System.out.println("Server received: " + received);
-         //   Thread.sleep(10000);
-           // ctx.writeAndFlush(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
 
         ctx.write(Unpooled.copiedBuffer( received, CharsetUtil.UTF_8));
 
         ctx.flush();
-
-       // Thread.sleep(10000);
-
-
-        ctx.write(Unpooled.copiedBuffer( "2nd attempt", CharsetUtil.UTF_8));
-
-        ctx.flush();
-
-       // Thread.sleep(10000);
 
         ctx.write(Unpooled.copiedBuffer( "DONEz", CharsetUtil.UTF_8));
 
@@ -50,8 +39,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
           //  ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
             //
             //
-            ctx.write(Unpooled.EMPTY_BUFFER)
-                .addListener(ChannelFutureListener.CLOSE);
+         //   ctx.write(Unpooled.EMPTY_BUFFER)
+          //      .addListener(ChannelFutureListener.CLOSE);
             decrement();
         }
 
